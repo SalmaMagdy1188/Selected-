@@ -89,9 +89,15 @@ ax.plot(nums, sigmoid(nums), 'r')
 # In[76]:
 
 
+from sklearn.preprocessing import StandardScaler
 bc = datasets.load_breast_cancer()
+# store data in X and y variables
 X, y = bc.data, bc.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+# scalling the input data
+sc_X = StandardScaler() 
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.fit_transform(X_test)
 
 clf = LogisticRegression(lr=0.01)
 clf.fit(X_train,y_train)
